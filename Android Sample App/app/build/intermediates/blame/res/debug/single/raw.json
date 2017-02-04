@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\jpennisi_admin\\AndroidStudioProjects\\Thermal Imaging Camera\\Android Sample App\\app\\build\\intermediates\\res\\merged\\debug\\raw\\sampleframes.zip",
+        "source": "C:\\Users\\jpennisi_admin\\AndroidStudioProjects\\Thermal Imaging Camera\\Android Sample App\\app\\src\\main\\res\\raw\\sampleframes.zip"
+    },
+    {
+        "merged": "C:\\Users\\jpennisi_admin\\AndroidStudioProjects\\SoftheonExampleFlirOneApplication\\app\\build\\intermediates\\res\\merged\\debug\\raw\\sampleframes.zip",
+        "source": "C:\\Users\\jpennisi_admin\\AndroidStudioProjects\\SoftheonExampleFlirOneApplication\\app\\src\\main\\res\\raw\\sampleframes.zip"
+    },
+    {
+        "merged": "C:\\Users\\jpennisi_admin\\AndroidStudioProjects\\Thermal Imaging Camera\\Android Sample App\\app\\build\\intermediates\\res\\merged\\debug\\raw\\default_camera_files.zip",
+        "source": "C:\\Users\\jpennisi_admin\\AndroidStudioProjects\\Thermal Imaging Camera\\Android Sample App\\app\\build\\intermediates\\exploded-aar\\flironesdk\\res\\raw\\default_camera_files.zip"
+    },
+    {
+        "merged": "C:\\Users\\jpennisi_admin\\AndroidStudioProjects\\SoftheonExampleFlirOneApplication\\app\\build\\intermediates\\res\\merged\\debug\\raw\\default_camera_files.zip",
+        "source": "C:\\Users\\jpennisi_admin\\AndroidStudioProjects\\SoftheonExampleFlirOneApplication\\app\\build\\intermediates\\exploded-aar\\flironesdk\\res\\raw\\default_camera_files.zip"
+    }
+]

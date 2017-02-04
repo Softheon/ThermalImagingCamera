@@ -1,0 +1,7 @@
+#Sat Feb 04 14:28:23 EST 2017
+base.0=C\:\\Users\\jpennisi_admin\\AndroidStudioProjects\\SoftheonExampleFlirOneApplication\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_5897126daffd7f951bf4eb45d68e913d6e206aff
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\jpennisi_admin\\AndroidStudioProjects\\SoftheonExampleFlirOneApplication\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_fcd91e89b2b3fb30e73d58428ecc6077f25c8531\\classes.dex
+base.1=C\:\\Users\\jpennisi_admin\\AndroidStudioProjects\\SoftheonExampleFlirOneApplication\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_fcd91e89b2b3fb30e73d58428ecc6077f25c8531
+file.0=C\:\\Users\\jpennisi_admin\\AndroidStudioProjects\\SoftheonExampleFlirOneApplication\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_5897126daffd7f951bf4eb45d68e913d6e206aff\\classes.dex
