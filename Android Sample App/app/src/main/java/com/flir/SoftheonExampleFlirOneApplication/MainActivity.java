@@ -7,11 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -26,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.flir.SoftheonExampleFlirOneApplication.Authentication.Tokenizer;
+import com.flir.SoftheonExampleFlirOneApplication.Softheon.ThermalImageReading;
+import com.flir.SoftheonExampleFlirOneApplication.util.BuildExtension;
 import com.flir.SoftheonExampleFlirOneApplication.util.SystemUiHider;
 import com.flir.flironesdk.Device;
 import com.flir.flironesdk.FlirUsbDevice;
@@ -82,10 +82,26 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
     //The thermal bitmap
     private Bitmap thermalBitmap = null;
 
-    /**
-     * The instance of the {@link SystemUiHider} for this activity.
-     */
+    // The instance of the {@link SystemUiHider} for this activity.
     private SystemUiHider mSystemUiHider;
+
+    //OAuth client id
+    final private static String clientId = "hack001";
+
+    //OAuth client Secret
+    final private static String clientSecret = "hack001";
+
+    //OAuth client Scopes
+    final private static String scopes = "enterpriseapi";
+
+    //OAuth endpoint
+    final private static String oAuthEndPoint = "https://hack.softheon.io/api/identity/core/connect/token";
+
+    //Enterprise endpoint
+    final private static String enterpriseApiEndPoint = "https://hack.softheon.io/api/enterprise/content/v1/folder/1";
+
+    //The current temperature in the cross hair
+    private double temperatureC;
 
     //endregion
 
@@ -93,10 +109,12 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
     @Override
     protected void onStart() {
         super.onStart();
+
         thermalImageView = (ImageView) findViewById(com.flir.SoftheonExampleFlirOneApplication.R.id.imageView);
         if (Device.getSupportedDeviceClasses(this).contains(FlirUsbDevice.class)) {
             findViewById(com.flir.SoftheonExampleFlirOneApplication.R.id.pleaseConnect).setVisibility(View.VISIBLE);
         }
+
         try {
             Device.startDiscovery(this, this);
         } catch (IllegalStateException e) {
@@ -115,7 +133,6 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         setContentView(com.flir.SoftheonExampleFlirOneApplication.R.layout.activity_preview);
 
@@ -407,6 +424,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Called when the device confirms enabling or disabling the automatic tuning function.
+     *
      * @param deviceWillTuneAutomatically - The newly applied setting for automatic tuning. True if device will automatically tune.
      */
     @Override
@@ -416,6 +434,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Called whenever the battery charging state changes
+     *
      * @param batteryChargingState - the new state of the battery
      */
     @Override
@@ -454,6 +473,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Called whenever the battery charge percentage changes
+     *
      * @param percentage - between 0 and 100 inclusive
      */
     @Override
@@ -477,12 +497,13 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
      * Note: if you have requested N formats, this method will be called N times per Frame passed to the FrameProcessor instance.
      * If your goal is to record a video from a sequence of frames, use android.media.MediaCodec and call mediaCodec.queueInputBuffer
      * from this method with the frame's pixelData byte array put in the input ByteBuffer of the mediaCodec
+     *
      * @param renderedImage - The image after processing has been applied
      */
     @Override
     public void onFrameProcessed(final RenderedImage renderedImage) {
         if (renderedImage.imageType() == RenderedImage.ImageType.ThermalRadiometricKelvinImage) {
-            CalculateSpotMeterValue(renderedImage);
+            this.temperatureC = CalculateSpotMeterValue(renderedImage);
         } else {
             if (thermalBitmap == null) {
                 thermalBitmap = renderedImage.getBitmap();
@@ -506,6 +527,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Called when a frame has been received when streaming
+     *
      * @param frame - the object representing a received frame
      */
     @Override
@@ -523,6 +545,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Event listener for tune button click
+     *
      * @param v - The view
      */
     public void onTuneClicked(View v) {
@@ -533,6 +556,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Event listener for capture image
+     *
      * @param v - The view
      */
     public void onCaptureImageClicked(View v) {
@@ -553,6 +577,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Event listener for toggle simulator
+     *
      * @param v - The view
      */
     public void onConnectSimClicked(View v) {
@@ -574,6 +599,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Event listener for simulated charge cable clicked
+     *
      * @param v - The view
      */
     public void onSimulatedChargeCableToggleClicked(View v) {
@@ -585,6 +611,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Event listener for rotate button
+     *
      * @param v - The view
      */
     public void onRotateClicked(View v) {
@@ -598,6 +625,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Event listener for change thermal image view
+     *
      * @param v - The view
      */
     public void onChangeViewClicked(View v) {
@@ -627,6 +655,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Event listener for image type drop down list
+     *
      * @param v - The view
      */
     public void onImageTypeListViewClicked(View v) {
@@ -639,6 +668,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Event listener for Palette List View
+     *
      * @param v - The view
      */
     public void onPaletteListViewClicked(View v) {
@@ -682,6 +712,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * On post create event listener
+     *
      * @param savedInstanceState - The saved instance state
      */
     @Override
@@ -732,9 +763,10 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Calculates the spot meter value using the Thermal Radiometric Kelvin Image
+     *
      * @param renderedImage - The rendered image
      */
-    private void CalculateSpotMeterValue(RenderedImage renderedImage) {
+    private double CalculateSpotMeterValue(RenderedImage renderedImage) {
         // Note: this code is not optimized
 
         int[] thermalPixels = renderedImage.thermalPixelValues();
@@ -792,43 +824,57 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
             updateThermalImageView(demoBitmap);
         }
+
+        return averageC;
     }
 
     /**
      * Captures the image
+     *
      * @param renderedImage - The rendered image
      */
     private void CaptureImage(final RenderedImage renderedImage) {
         imageCaptureRequested = false;
         final Context context = this;
+
+        final double celsius = this.temperatureC;
         new Thread(new Runnable() {
+            @Override
             public void run() {
-                String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
+                runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        findViewById(R.id.uploading).setVisibility(View.VISIBLE);
+                        findViewById(R.id.spotMeterIcon).setVisibility(View.INVISIBLE);
+                    }
+                });
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ssZ", Locale.getDefault());
                 String formatedDate = sdf.format(new Date());
-                String fileName = "FLIROne-" + formatedDate + ".jpg";
-                try {
-                    lastSavedPath = path + "/" + fileName;
-                    renderedImage.getFrame().save(new File(lastSavedPath), RenderedImage.Palette.Iron, RenderedImage.ImageType.BlendedMSXRGBA8888Image);
+                String fileName = "FLIROne-" + formatedDate + "-" + BuildExtension.SERIAL;
 
-                    MediaScannerConnection.scanFile(context,
-                            new String[]{path + "/" + fileName}, null,
-                            new MediaScannerConnection.OnScanCompletedListener() {
-                                @Override
-                                public void onScanCompleted(String path, Uri uri) {
-                                    Log.i("ExternalStorage", "Scanned " + path + ":");
-                                    Log.i("ExternalStorage", "-> uri=" + uri);
-                                }
+                String token = Tokenizer.getToken(oAuthEndPoint, clientId, clientSecret, scopes);
+                ThermalImageReading reading = new ThermalImageReading(fileName);
+                reading.setCelsius(celsius);
+                reading.setKelvin(celsius + 273.15);
+                reading.setFahrenheit(celsius * 9 / 5 + 32);
+                Integer result = reading.upload(enterpriseApiEndPoint, token);
 
-                            });
+                if(result != null) {
+                    //Update UI with result
 
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+
+                runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        findViewById(R.id.uploading).setVisibility(View.INVISIBLE);
+                        findViewById(R.id.spotMeterIcon).setVisibility(View.VISIBLE);
+                    }
+                });
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         thermalImageView.animate().setDuration(50).scaleY(0).withEndAction((new Runnable() {
                             public void run() {
                                 thermalImageView.animate().setDuration(50).scaleY(1);
@@ -842,6 +888,7 @@ public class MainActivity extends Activity implements Device.Delegate, FrameProc
 
     /**
      * Updates the thermal image view's bitmap image
+     *
      * @param frame - The bitmap image to use
      */
     private void updateThermalImageView(final Bitmap frame) {
