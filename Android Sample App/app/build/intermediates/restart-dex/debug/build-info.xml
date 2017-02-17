@@ -5,65 +5,32 @@
     density="xxxhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="1053254122021859"
+    timestamp="1142757792325408"
     token="-6616688640805585888"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="21583" />
+        duration="0" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="17976" />
+        duration="0" />
     <task
         name="verifier"
-        duration="26" />
-
-    <artifact
-        location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
-        type="RESOURCES" />
-    <artifact
-        location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_7\classes.dex"
-        type="DEX" />
-    <artifact
-        location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
-        type="DEX" />
-    <artifact
-        location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
-        type="DEX" />
+        duration="0" />
 
     <build
-        timestamp="1043458021855549"
+        timestamp="1141907591846760"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="1050288634650741"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="1053254122021859"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
-            type="RESOURCES" />
-        <artifact
-            location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_7\classes.dex"
-            type="DEX" />
-        <artifact
-            location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
-            type="DEX" />
-        <artifact
-            location="C:\Users\jpennisi_admin\AndroidStudioProjects\Thermal Imaging Camera\Android Sample App\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
-            type="DEX" />
-    </build>
+        timestamp="1142757792325408"
+        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>

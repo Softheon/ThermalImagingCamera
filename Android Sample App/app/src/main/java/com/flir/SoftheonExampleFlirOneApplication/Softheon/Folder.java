@@ -38,16 +38,25 @@ public class Folder {
     @JsonProperty("State")
     final public int state = 0;
 
-    public Folder() {
 
-    }
-
+    /**
+     * Folder constructor
+     * @param folderId - The folder id
+     * @param folderName - The folder name
+     * @param folderType - The folder type
+     */
     public Folder(int folderId, String folderName, int folderType) {
         this.folderId = folderId;
         this.folderName = folderName;
         this.folderType = folderType;
     }
 
+    /**
+     * Uploads the folder to softheon
+     * @param endPoint - enterprise api endpoint
+     * @param accessToken - access token
+     * @return - Integer
+     */
     public Integer upload(String endPoint, String accessToken) {
         //Initialize the HTTP URL Connection
         HttpURLConnection conn = null;

@@ -5,17 +5,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 /**
- * Created by jpennisi_admin on 2/7/2017.
+ * Profile object
  */
-
 public class Profile {
 
+    //Number of string
     final private static int stringCount = 32;
 
+    //Number of integers
     final private static int integerCount = 8;
 
+    //Number of doubles
     final private static int doubleCount = 4;
 
+    //Number of dates
     final private static int dateCount = 4;
 
     @JsonProperty("Strings")

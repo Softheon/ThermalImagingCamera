@@ -6,6 +6,10 @@ import java.lang.reflect.Field;
 
 public class BuildExtension extends android.os.Build {
 
+    /**
+     * Gets the operating system
+     * @return - OS
+     */
     public static String getOperatingSystem() {
         StringBuilder builder = new StringBuilder();
         builder.append("android : ").append(VERSION.RELEASE);

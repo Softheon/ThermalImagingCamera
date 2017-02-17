@@ -1,4 +1,4 @@
-#Thu Feb 16 13:59:33 EST 2017
+#Fri Feb 17 17:21:04 EST 2017
 base.0=C\:\\Users\\jpennisi_admin\\AndroidStudioProjects\\Thermal Imaging Camera\\Android Sample App\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_5a76c7187dc2c401d08b3d4013d106ff228534a7
 renamed.1=classes.dex
 renamed.0=classes2.dex
